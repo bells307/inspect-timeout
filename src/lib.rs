@@ -78,6 +78,25 @@ where
     }
 }
 
+pub trait InspectTimeoutExt<Fut, F, T>
+where
+    Fut: Future<Output = T>,
+    F: FnOnce(),
+{
+    /// Set a callback in case the `Future` does not complete within a specified period of time
+    fn inspect_timeout(self, dur: Duration, elapse_fn: F) -> InspectTimeout<Fut, F, T>;
+}
+
+impl<Fut, F, T> InspectTimeoutExt<Fut, F, T> for Fut
+where
+    Fut: Future<Output = T>,
+    F: FnOnce(),
+{
+    fn inspect_timeout(self, dur: Duration, elapse_fn: F) -> InspectTimeout<Fut, F, T> {
+        InspectTimeout::new(self, dur, elapse_fn)
+    }
+}
+
 enum DelayState {
     Idle,
     Running,
