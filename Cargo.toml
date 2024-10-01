@@ -1,0 +1,12 @@
+[package]
+name = "inspect-timeout"
+description = "A future combinator that applies a timeout with a custom callback when the timeout elapses"
+version = "0.1.0"
+authors = ["Bells307"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/bells307/drop-panic"
+
+[dependencies]
+pin-project = "1.1.5"
+tokio = { version = "1.40.0", features = ["time"] }
